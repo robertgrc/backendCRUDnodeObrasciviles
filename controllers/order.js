@@ -39,7 +39,7 @@ const updateOrder = async (req, res = response) => {
     const order = await Order.findById(orderId);
 
     if (!order) {
-      res.status(404).json({
+      return res.status(404).json({
         ok: false,
         msg: "No existe ninguna obra con ese id",
       });
@@ -66,11 +66,33 @@ const updateOrder = async (req, res = response) => {
     });
   }
 };
-const deleteOrder = (req, res = response) => {
-  res.json({
-    ok: true,
-    msg: "deleteOrder",
-  });
+const deleteOrder = async (req, res = response) => {
+  const orderId = req.params.id;
+
+  try {
+    const order = await Order.findById(orderId);
+
+    if (!order) {
+      return res.status(404).json({
+        ok: false,
+        msg: "No existe ninguna obra con ese id",
+      });
+    }
+
+    await Order.findByIdAndDelete(orderId);
+
+    res.json({
+      ok: true,
+    });
+
+    console.log(req.body);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      ok: false,
+      msg: "hable con el administrador",
+    });
+  }
 };
 
 module.exports = {
