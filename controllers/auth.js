@@ -58,6 +58,12 @@ const loginUsuario = async (req, res = response) => {
         msg: "Password incorrecto",
       });
     }
+
+    res.json({
+      ok: true,
+      uid: usuario.id,
+      name: usuario.name,
+    });
   } catch (error) {
     console.log(error);
     res.status(500).json({

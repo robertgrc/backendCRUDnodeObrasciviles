@@ -11,15 +11,18 @@ const getOrders = (req, res = response) => {
     msg: "getOrders",
   });
 };
+
 const createOrder = async (req, res = response) => {
   const order = new Order(req.body);
 
   try {
+    order.user = req.uid;
+
     const ordenGuardada = await order.save();
 
     res.json({
       ok: true,
-      msg: ordenGuardada,
+      orden: ordenGuardada,
     });
   } catch (error) {
     console.log(error);
