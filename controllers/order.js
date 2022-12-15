@@ -1,14 +1,14 @@
 const { response } = require("express");
 const Order = require("../models/Order");
 
-const getOrders = (req, res = response) => {
+const getOrders = async (req, res = response) => {
   //verificar que tenga el evento
 
-  console.log(req.body);
+  const orders = await Order.find();
 
   res.json({
     ok: true,
-    msg: "getOrders",
+    orders,
   });
 };
 
