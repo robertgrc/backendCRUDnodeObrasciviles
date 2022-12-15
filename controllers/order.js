@@ -32,11 +32,39 @@ const createOrder = async (req, res = response) => {
     });
   }
 };
-const updateOrder = (req, res = response) => {
-  res.json({
-    ok: true,
-    msg: "updateOrder",
-  });
+const updateOrder = async (req, res = response) => {
+  const orderId = req.params.id;
+
+  try {
+    const order = await Order.findById(orderId);
+
+    if (!order) {
+      res.status(404).json({
+        ok: false,
+        msg: "No existe ninguna obra con ese id",
+      });
+    }
+    const newOrder = {
+      ...req.body,
+    };
+
+    const orderUpdate = await Order.findByIdAndUpdate(orderId, newOrder, {
+      new: true,
+    });
+
+    res.json({
+      ok: true,
+      order: orderUpdate,
+    });
+
+    console.log(req.body);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      ok: false,
+      msg: "hable con el administrador",
+    });
+  }
 };
 const deleteOrder = (req, res = response) => {
   res.json({
