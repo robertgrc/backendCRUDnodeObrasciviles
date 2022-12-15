@@ -6,6 +6,9 @@ Order Routes
 */
 
 const { Router } = require("express");
+const { check } = require("express-validator");
+
+const { validarCampos } = require("../middlewares/validar-campos");
 
 const {
   getOrders,
@@ -20,7 +23,16 @@ const router = Router();
 router.get("/", getOrders);
 
 //Crear un evento nuevo
-router.post("/", createOrder);
+router.post(
+  "/",
+  [
+    check("titulo", "El titulo es obligatorio").not().isEmpty(),
+    check("descripcion", "La descripcion es obligatoria").not().isEmpty(),
+
+    validarCampos,
+  ],
+  createOrder
+);
 
 //Actualizar un evento
 router.put("/:id", updateOrder);
