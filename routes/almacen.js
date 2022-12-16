@@ -11,16 +11,16 @@ const { check } = require("express-validator");
 const { validarCampos } = require("../middlewares/validar-campos");
 
 const {
-  getOrders,
-  createOrder,
-  updateOrder,
-  deleteOrder,
-} = require("../controllers/order");
+  getSolicitudesAlmacenes,
+  createSolicitudAlmacen,
+  updateSolicitudAlmacen,
+  deleteSolicitudAlmacen,
+} = require("../controllers/almacen");
 
 const router = Router();
 
 //Obtener eventos
-router.get("/", getOrders);
+router.get("/", getSolicitudesAlmacenes);
 
 //Crear un evento nuevo
 router.post(
@@ -40,13 +40,13 @@ router.post(
       .isEmpty(),
     validarCampos,
   ],
-  createOrder
+  createSolicitudAlmacen
 );
 
 //Actualizar un evento
-router.put("/:id", updateOrder);
+router.put("/:id", updateSolicitudAlmacen);
 
 //Borrar un evento
-router.delete("/:id", deleteOrder);
+router.delete("/:id", deleteSolicitudAlmacen);
 
 module.exports = router;

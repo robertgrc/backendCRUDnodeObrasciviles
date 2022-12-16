@@ -1,6 +1,6 @@
 const { Schema, model } = require("mongoose");
 
-const OrderSchema = Schema({
+const AlmacenSchema = Schema({
   idSolicitud: {
     type: Number,
     required: true,
@@ -32,10 +32,10 @@ const OrderSchema = Schema({
   },
 });
 
-OrderSchema.method("toJSON", function () {
+AlmacenSchema.method("toJSON", function () {
   const { __v, _id, ...object } = this.toObject();
   object.id = _id;
   return object;
 });
 
-module.exports = model("Order", OrderSchema);
+module.exports = model("Almacen", AlmacenSchema);
