@@ -21,7 +21,11 @@ const AlmacenSchema = Schema({
     type: String,
     required: true,
   },
-  idSolicitudAlmacen: {
+  procesoOrigen: {
+    type: String,
+    required: true,
+  },
+  idRegistroExterno: {
     type: Number,
     required: true,
   },

@@ -29,13 +29,14 @@ router.post(
     check("idSolicitud", "El idSolicitud es obligatorio").not().isEmpty(),
     check("titulo", "El titulo es obligatorio").not().isEmpty(),
     check("descripcion", "La descripcion es obligatoria").not().isEmpty(),
+    check("procesoOrigen", "el procesoOrigen es obligatorio").not().isEmpty(),
     check("estado_solicitud", "El estado de la solicitud es obligatorio")
       .not()
       .isEmpty(),
     check("fecha_solicitud", "La fecha de solicitud es obligatoria")
       .not()
       .isEmpty(),
-    check("idSolicitudAlmacen", "El idSolicitudAlmacen es obligatorio")
+    check("idRegistroExterno", "El idRegistroExterno es obligatorio")
       .not()
       .isEmpty(),
     validarCampos,
