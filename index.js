@@ -17,6 +17,7 @@ app.use(express.json());
 //Rutas
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/almacen", require("./routes/almacen"));
+app.use("/api/reserva", require("./routes/reserva"));
 
 //Escuchar peticiones
 app.listen(process.env.PORT, () => {
