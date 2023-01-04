@@ -1,33 +1,52 @@
 const { Schema, model } = require("mongoose");
 
 const ReservaSchema = Schema({
-  idSolicitud: {
+  nombreCompleto: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+  },
+  telefono: {
+    type: String,
+    required: true,
+  },
+  tarjetaCredito: {
     type: Number,
     required: true,
   },
-  titulo: {
-    type: String,
-    required: true,
-  },
-  descripcion: {
-    type: String,
-    required: true,
-  },
-  estado_solicitud: {
-    type: String,
-    required: true,
-  },
-  fecha_solicitud: {
-    type: String,
-    required: true,
-  },
-  procesoOrigen: {
-    type: String,
-    required: true,
-  },
-  idRegistroExterno: {
+  numeroTarjeta: {
     type: Number,
     required: true,
+  },
+  empresa: {
+    type: String,
+    required: true,
+  },
+  telefonoEmpresa: {
+    type: String,
+    required: true,
+  },
+  reservadoPor: {
+    type: String,
+    required: true,
+  },
+  fechaReserva: {
+    type: Date,
+    required: true,
+    // required:true
+  },
+  tipoHabitacion: {
+    type: String,
+    required: true,
+    // required:true
+  },
+  observaciones: {
+    type: String,
+    required: true,
+    // required:true
   },
   user: {
     type: Schema.Types.ObjectId,
