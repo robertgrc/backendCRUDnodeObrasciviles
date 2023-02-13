@@ -36,17 +36,22 @@ const ReservaSchema = Schema({
   fechaReserva: {
     type: Date,
     required: true,
-    // required:true
   },
   tipoHabitacion: {
-    type: String,
+    type: [],
     required: true,
-    // required:true
   },
   observaciones: {
     type: String,
     required: true,
-    // required:true
+  },
+  fechaIngreso: {
+    type: String,
+    required: true,
+  },
+  fechaSalida: {
+    type: String,
+    required: true,
   },
   user: {
     type: Schema.Types.ObjectId,
