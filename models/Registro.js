@@ -30,7 +30,15 @@ const RegistroSchema = Schema({
     type: String,
   },
   tipoHabitacion: {
+    type: [],
+  },
+  fechaIngreso: {
     type: String,
+    required: true,
+  },
+  fechaSalida: {
+    type: String,
+    required: true,
   },
   observaciones: {
     type: String,

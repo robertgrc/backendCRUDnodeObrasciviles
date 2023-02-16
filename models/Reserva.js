@@ -34,7 +34,7 @@ const ReservaSchema = Schema({
     required: true,
   },
   fechaReserva: {
-    type: Date,
+    type: {},
     required: true,
   },
   tipoHabitacion: {
