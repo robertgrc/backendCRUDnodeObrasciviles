@@ -1,5 +1,5 @@
 /*
-/api/reserva
+/api/comandaConsumoFrigobar
 */
 
 const { Router } = require("express");
@@ -12,7 +12,7 @@ const {
   createComandaConsumoFrigobar,
   updateComandaConsumoFrigobar,
   deleteComandaConsumoFrigobar,
-} = require("../controllers/registroTarjetaReserva");
+} = require("../controllers/comandaConsumoFrigobar");
 
 const router = Router();
 
@@ -21,12 +21,7 @@ router.get("/", getComandaConsumoFrigobar);
 
 //Crear un reserva
 router.post(
-  "/",
-  [
-    check("nombreCompleto", "El nombreCompleto es obligatorio").not().isEmpty(),
-    validarCampos,
-  ],
-  createComandaConsumoFrigobar
+  "/", createComandaConsumoFrigobar
 );
 
 //Actualizar un reserva
