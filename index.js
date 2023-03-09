@@ -25,6 +25,8 @@ app.use("/api/registro", require("./routes/registro"));
 app.use("/api/registroTarjetaReserva", require("./routes/registroTarjetaReserva"));
 app.use("/api/comandaConsumoFrigobar", require("./routes/comandaConsumoFrigobar"));
 app.use("/api/comandaRestaurante", require("./routes/comandaRestaurante"));
+app.use("/api/consumoCliente", require("./routes/consumoCliente"));
+app.use("/api/lavanderia", require("./routes/lavanderia"));
 
 //Escuchar peticiones
 app.listen(process.env.PORT, () => {

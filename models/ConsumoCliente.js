@@ -1,6 +1,6 @@
 const { Schema, model } = require("mongoose");
 
-const ComandaConsumoFrigobarSchema = Schema({
+const ConsumoClienteSchema = Schema({
   numeroHabitacion: {
     type: Number,
     required: true,
@@ -12,7 +12,7 @@ const ComandaConsumoFrigobarSchema = Schema({
   fechaActual: {
     type: String,
   },
-  camarera: {
+  recepcionista: {
     type: String,
     required: true,
   },
@@ -36,10 +36,10 @@ const ComandaConsumoFrigobarSchema = Schema({
   }]
 });
 
-ComandaConsumoFrigobarSchema.method("toJSON", function () {
+    ConsumoClienteSchema.method("toJSON", function () {
   const { __v, _id, ...object } = this.toObject();
   object.id = _id;
   return object;
 });
 
-module.exports = model("ComandaConsumoFrigobar", ComandaConsumoFrigobarSchema);
+module.exports = model("ConsumoCliente", ConsumoClienteSchema);

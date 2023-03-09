@@ -1,9 +1,13 @@
+/* Rutas de Usuarios/Auth
+   host + api/auth
+*/
+
 const { Router } = require("express");
 const { check } = require("express-validator");
 const router = Router();
 const { validarCampos } = require("../middlewares/validar-campos");
 
-const { crearUsuario, loginUsuario } = require("../controllers/auth");
+const { crearUsuario, loginUsuario, revalidarToken } = require("../controllers/auth");
 
 router.post(
   "/new",
@@ -30,4 +34,5 @@ router.post(
   loginUsuario
 );
 
+router.get("/renew", revalidarToken)
 module.exports = router;

@@ -73,7 +73,16 @@ const loginUsuario = async (req, res = response) => {
   }
 };
 
+const revalidarToken = (req, res=response)=>{
+  res.json({
+    ok:true,
+    msg: 'renew'
+  })
+}
+
+
 module.exports = {
   crearUsuario,
   loginUsuario,
+  revalidarToken
 };
