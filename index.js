@@ -28,6 +28,7 @@ app.use("/api/comandaRestaurante", require("./routes/comandaRestaurante"));
 app.use("/api/consumoCliente", require("./routes/consumoCliente"));
 app.use("/api/lavanderia", require("./routes/lavanderia"));
 
+
 //Escuchar peticiones
 app.listen(process.env.PORT, () => {
   console.log(`corriendo en el puerto>> ${process.env.PORT}`);
