@@ -2,8 +2,7 @@ const { response } = require("express");
 const Reserva = require("../models/Reserva");
 
 const getReservas = async (req, res = response) => {
-  //verificar que tenga el evento
-
+  
   const reservas = await Reserva.find();
 
   res.json({
@@ -12,6 +11,29 @@ const getReservas = async (req, res = response) => {
   });
 };
 
+const getReservaById = async (req, res = response) =>{
+  const reservaId = req.params.id;
+  try {
+    const reservaById = await Reserva.findById(reservaId);
+    if (!reservaById) {
+      return res.status(404).json({
+        ok: false,
+        msg: "No existe Reserva con ese id",
+      });
+    }
+    res.json({
+      ok: true,
+      reserva: reservaById,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      ok: false,
+      msg: "hable con el administrador",
+    });
+  }
+}
+  
 const createReserva = async (req, res = response) => {
   const reserva = new Reserva(req.body);
 
@@ -42,20 +64,14 @@ const updateReserva = async (req, res = response) => {
     if (!reserva) {
       return res.status(404).json({
         ok: false,
-        msg: "No existe ninguna solicitud de almacen con ese id",
+        msg: "No existe Reserva con ese id",
       });
     }
-    const nuevaSolicitudReserva = {
+    const nuevaReservaActualizada = {
       ...req.body,
     };
 
-    const reservaUpdate = await Reserva.findByIdAndUpdate(
-      reservaId,
-      nuevaSolicitudReserva,
-      {
-        new: true,
-      }
-    );
+    const reservaUpdate = await Reserva.findByIdAndUpdate(reservaId, nuevaReservaActualizada,{new: true,});
 
     res.json({
       ok: true,
@@ -71,6 +87,7 @@ const updateReserva = async (req, res = response) => {
     });
   }
 };
+
 const deleteReserva = async (req, res = response) => {
   const reservaId = req.params.id;
 
@@ -102,6 +119,7 @@ const deleteReserva = async (req, res = response) => {
 
 module.exports = {
   getReservas,
+  getReservaById,
   createReserva,
   updateReserva,
   deleteReserva,

@@ -10,6 +10,7 @@ const { validarCampos } = require("../middlewares/validar-campos");
 
 const {
   getReservas,
+  getReservaById,
   createReserva,
   updateReserva,
   deleteReserva,
@@ -19,6 +20,8 @@ const router = Router();
 
 //Obtener reservas
 router.get("/", getReservas);
+
+router.get("/:id", getReservaById);
 
 //Crear un reserva
 router.post(
