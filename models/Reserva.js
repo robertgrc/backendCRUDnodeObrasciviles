@@ -56,7 +56,7 @@ const ReservaSchema = Schema({
   user: {
     type: Schema.Types.ObjectId,
     ref: "Usuario",
-    required: true,
+    // required: true,
   },
 });
 
