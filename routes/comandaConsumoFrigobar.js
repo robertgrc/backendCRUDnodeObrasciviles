@@ -6,6 +6,7 @@ const { Router } = require("express");
 const { check } = require("express-validator");
 
 const { validarCampos } = require("../middlewares/validar-campos");
+const { validarJWT } = require("../middlewares/validar-jwt")
 
 const {
   getComandaConsumoFrigobar,
@@ -21,7 +22,9 @@ router.get("/", getComandaConsumoFrigobar);
 
 //Crear un reserva
 router.post(
-  "/", createComandaConsumoFrigobar
+  "/", 
+ 
+  createComandaConsumoFrigobar
 );
 
 //Actualizar un reserva
