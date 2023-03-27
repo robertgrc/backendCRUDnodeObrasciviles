@@ -1,5 +1,6 @@
 const { response } = require("express");
 const Reserva = require("../models/Reserva");
+const Usuario = require("../models/Usuario");
 
 const getReservas = async (req, res = response) => {
   
@@ -21,9 +22,18 @@ const getReservaById = async (req, res = response) =>{
         msg: "No existe Reserva con ese id",
       });
     }
+    
+    const userId = reservaById.reservadoPor;
+    console.log(userId)
+    const user = await Usuario.findById(userId);
+    console.log(user)
+    const userName = user.name;
+    console.log(userName)
+
     res.json({
       ok: true,
       reserva: reservaById,
+      reservadoPor: userName,
     });
   } catch (error) {
     console.log(error);
