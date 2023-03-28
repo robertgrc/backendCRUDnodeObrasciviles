@@ -24,17 +24,19 @@ const getReservaById = async (req, res = response) =>{
     }
     
     const userId = reservaById.reservadoPor;
-    console.log(userId)
+    console.log(reservaById)
     const user = await Usuario.findById(userId);
-    console.log(user)
-    const userName = user.name;
-    console.log(userName)
-
+    // console.log(user)
+    reservaById.reservadoPor=user.name
+    const reserva = {
+      ...reservaById,
+    }
+    console.log(reserva)
     res.json({
       ok: true,
-      reserva: reservaById,
-      reservadoPor: userName,
+      reserva:reservaById
     });
+
   } catch (error) {
     console.log(error);
     res.status(500).json({
