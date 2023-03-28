@@ -79,6 +79,7 @@ const updateReserva = async (req, res = response) => {
         msg: "No existe Reserva con ese id",
       });
     }
+    
     const nuevaReservaActualizada = {
       ...req.body,
     };
@@ -87,7 +88,7 @@ const updateReserva = async (req, res = response) => {
 
     res.json({
       ok: true,
-      almacen: reservaUpdate,
+      reserva: reservaUpdate,
     });
 
     console.log(req.body);
