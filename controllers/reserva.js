@@ -26,8 +26,9 @@ const getReservaById = async (req, res = response) =>{
     const userId = reservaById.reservadoPor;
     console.log(reservaById)
     const user = await Usuario.findById(userId);
-    // console.log(user)
+    console.log("user**:",user)
     reservaById.reservadoPor=user.name
+    reservaById.reservadoPorId=userId
     const reserva = {
       ...reservaById,
     }
@@ -80,6 +81,11 @@ const updateReserva = async (req, res = response) => {
       });
     }
     
+    // //console.log("reserva***",reserva)
+    // const user = await Usuario.findOne(reserva.reservadoPor);
+    // // console.log("user***:",user)
+    // req.body.reservadoPor = user._id;
+
     const nuevaReservaActualizada = {
       ...req.body,
     };

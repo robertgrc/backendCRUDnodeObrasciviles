@@ -10,6 +10,7 @@ const { validarCampos } = require("../middlewares/validar-campos");
 
 const {
   getRegistros,
+  getRegistroById,
   createRegistro,
   updateRegistro,
   deleteRegistro,
@@ -17,10 +18,12 @@ const {
 
 const router = Router();
 
-//Obtener reservas
+//Obtener registro
 router.get("/", getRegistros);
 
-//Crear un reserva
+router.get("/:id", getRegistroById);
+
+//Crear un registro
 router.post(
   "/",
   [
@@ -30,10 +33,10 @@ router.post(
   createRegistro
 );
 
-//Actualizar un reserva
+//Actualizar un registro
 router.put("/:id", updateRegistro);
 
-//Borrar un reserva
+//Borrar un registro
 router.delete("/:id", deleteRegistro);
 
 module.exports = router;

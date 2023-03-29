@@ -8,9 +8,40 @@ const getRegistros = async (req, res = response) => {
 
   res.json({
     ok: true,
+    desdeRegistro: true,
     registros,
   });
 };
+
+const getRegistroById = async (req, res = response) =>{
+  const registroId = req.params.id;
+  console.log(registroId);
+  try {
+    const registroById = await Registro.findById(registroId);
+    if (!registroById) {
+      return res.status(404).json({
+        ok: false,
+        msg: "No existe Reserva con ese id",
+      });
+    }
+    
+    const registro = {
+      ...registroById,
+    }
+    console.log(registro)
+    res.json({
+      ok: true,
+      registro:registroById,
+    });
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      ok: false,
+      msg: "hable con el administrador",
+    });
+  }
+}
 
 const createRegistro = async (req, res = response) => {
   const registro = new Registro(req.body);
@@ -101,6 +132,7 @@ const deleteRegistro = async (req, res = response) => {
 
 module.exports = {
   getRegistros,
+  getRegistroById,
   createRegistro,
   updateRegistro,
   deleteRegistro,
