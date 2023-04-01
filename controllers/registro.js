@@ -80,17 +80,11 @@ const updateRegistro = async (req, res = response) => {
       ...req.body,
     };
 
-    const registroUpdate = await Registro.findByIdAndUpdate(
-      registroId,
-      nuevaSolicitudRegistro,
-      {
-        new: true,
-      }
-    );
+    const registroUpdate = await Registro.findByIdAndUpdate(registroId,nuevaSolicitudRegistro,{new: true,});
 
     res.json({
       ok: true,
-      almacen: registroUpdate,
+      registro: registroUpdate,
     });
 
     console.log(req.body);

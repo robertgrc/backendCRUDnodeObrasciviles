@@ -80,11 +80,6 @@ const updateReserva = async (req, res = response) => {
         msg: "No existe Reserva con ese id",
       });
     }
-    
-    // //console.log("reserva***",reserva)
-    // const user = await Usuario.findOne(reserva.reservadoPor);
-    // // console.log("user***:",user)
-    // req.body.reservadoPor = user._id;
 
     const nuevaReservaActualizada = {
       ...req.body,
