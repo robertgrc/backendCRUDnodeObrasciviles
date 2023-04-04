@@ -10,6 +10,7 @@ const { validarJWT } = require("../middlewares/validar-jwt")
 
 const {
   getComandaConsumoFrigobar,
+  getComandaConsumoFrigobarById,
   createComandaConsumoFrigobar,
   updateComandaConsumoFrigobar,
   deleteComandaConsumoFrigobar,
@@ -20,16 +21,13 @@ const router = Router();
 //Obtener reservas
 router.get("/", getComandaConsumoFrigobar);
 
-//Crear un reserva
-router.post(
-  "/", 
- 
-  createComandaConsumoFrigobar
-);
+//obtenerComandaConsumoFrigobarPorId
+router.get("/:id", getComandaConsumoFrigobarById);
 
+//Crear un reserva
+router.post("/", createComandaConsumoFrigobar);
 //Actualizar un reserva
 router.put("/:id", updateComandaConsumoFrigobar);
-
 //Borrar un reserva
 router.delete("/:id", deleteComandaConsumoFrigobar);
 

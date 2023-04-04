@@ -12,6 +12,36 @@ const getConsumoCliente = async (req, res = response) => {
   });
 };
 
+const getConsumoClienteById = async (req, res = response) =>{
+  const consumoClienteId = req.params.id;
+  console.log(consumoClienteId);
+  try {
+    const consumoClienteById = await ConsumoCliente.findById(consumoClienteId);
+    if (!consumoClienteById) {
+      return res.status(404).json({
+        ok: false,
+        msg: "No existe Reserva con ese id",
+      });
+    }
+    const consumofrigobar = {
+      ...consumoClienteById,
+    }
+    console.log(consumofrigobar)
+    res.json({
+      ok: true,
+      reserva:consumoClienteById
+    });
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      ok: false,
+      msg: "hable con el administrador Problema en consumoCliente controller",
+    });
+  }
+}
+  
+
 const createConsumoCliente = async (req, res = response) => {
   const registro = new ConsumoCliente(req.body);
 
@@ -101,6 +131,7 @@ const deleteConsumoCliente = async (req, res = response) => {
 
 module.exports = {
   getConsumoCliente,
+  getConsumoClienteById,
   createConsumoCliente,
   updateConsumoCliente,
   deleteConsumoCliente,

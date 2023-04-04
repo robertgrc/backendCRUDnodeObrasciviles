@@ -9,6 +9,7 @@ const { validarCampos } = require("../middlewares/validar-campos");
 
 const {
   getConsumoCliente,
+  getConsumoClienteById,
   createConsumoCliente,
   updateConsumoCliente,
   deleteConsumoCliente,
@@ -19,10 +20,11 @@ const router = Router();
 //Obtener reservas
 router.get("/", getConsumoCliente);
 
+//ObtenerConsumoCliente por Id
+router.get("/:id", getConsumoClienteById);
+
 //Crear un reserva
-router.post(
-  "/", createConsumoCliente
-);
+router.post("/", createConsumoCliente);
 
 //Actualizar un reserva
 router.put("/:id", updateConsumoCliente);

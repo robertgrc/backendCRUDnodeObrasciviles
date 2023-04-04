@@ -3,15 +3,42 @@ const ComandaConsumoFrigobar = require("../models/ComandaConsumoFrigobar");
 
 const getComandaConsumoFrigobar = async (req, res = response) => {
   //verificar que tenga el evento
-
   const registros = await ComandaConsumoFrigobar.find();
-
   res.json({
     ok: true,
     registros,
   });
 };
 
+const getComandaConsumoFrigobarById = async (req, res = response) =>{
+  const consumoFrigobarId = req.params.id;
+  console.log(consumoFrigobarId);
+  try {
+    const consumoFrigobarById = await ComandaConsumoFrigobar.findById(consumoFrigobarId);
+    if (!consumoFrigobarById) {
+      return res.status(404).json({
+        ok: false,
+        msg: "No existe Reserva con ese id",
+      });
+    }
+    const consumofrigobar = {
+      ...consumoFrigobarById,
+    }
+    console.log(consumofrigobar)
+    res.json({
+      ok: true,
+      reserva:consumoFrigobarById
+    });
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      ok: false,
+      msg: "hable con el administrador Problema en comandaConsumoFrigobar controller",
+    });
+  }
+}
+  
 const createComandaConsumoFrigobar = async (req, res = response) => {
   const registro = new ComandaConsumoFrigobar(req.body);
 
@@ -42,7 +69,7 @@ const updateComandaConsumoFrigobar = async (req, res = response) => {
     if (!registro) {
       return res.status(404).json({
         ok: false,
-        msg: "No existe ningun registro con ese id",
+        msg: "No existe ningun comandaConsumoFrigobar con ese id",
       });
     }
     const nuevaSolicitudRegistro = {
@@ -80,7 +107,7 @@ const deleteComandaConsumoFrigobar = async (req, res = response) => {
     if (!registro) {
       return res.status(404).json({
         ok: false,
-        msg: "No existe ningun registro con ese id",
+        msg: "No existe ningun comandaConsumoFrigobar con ese id",
       });
     }
 
@@ -101,6 +128,7 @@ const deleteComandaConsumoFrigobar = async (req, res = response) => {
 
 module.exports = {
   getComandaConsumoFrigobar,
+  getComandaConsumoFrigobarById,
   createComandaConsumoFrigobar,
   updateComandaConsumoFrigobar,
   deleteComandaConsumoFrigobar,
