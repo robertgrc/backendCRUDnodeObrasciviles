@@ -12,6 +12,35 @@ const getComandaRestaurante = async (req, res = response) => {
   });
 };
 
+const getComandaRestauranteById = async (req, res = response) =>{
+  const comandaRestauranteId = req.params.id;
+  console.log(comandaRestauranteId);
+  try {
+    const comandaRestauranteById = await ComandaRestaurante.findById(comandaRestauranteId);
+    if (!comandaRestauranteById) {
+      return res.status(404).json({
+        ok: false,
+        msg: "No existe Reserva con ese id",
+      });
+    }
+    const comandaRestaurante = {
+      ...comandaRestauranteById,
+    }
+    console.log(comandaRestaurante)
+    res.json({
+      ok: true,
+      reserva:comandaRestauranteById
+    });
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      ok: false,
+      msg: "hable con el administrador Problema en comandaRestaurante controller",
+    });
+  }
+}
+
 const createComandaRestaurante = async (req, res = response) => {
   const registro = new ComandaRestaurante(req.body);
 
@@ -101,6 +130,7 @@ const deleteComandaRestaurante = async (req, res = response) => {
 
 module.exports = {
   getComandaRestaurante,
+  getComandaRestauranteById,
   createComandaRestaurante,
   updateComandaRestaurante,
   deleteComandaRestaurante,

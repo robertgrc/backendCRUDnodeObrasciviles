@@ -9,6 +9,7 @@ const { validarCampos } = require("../middlewares/validar-campos");
 
 const {
   getComandaRestaurante,
+  getComandaRestauranteById,
   createComandaRestaurante,
   updateComandaRestaurante,
   deleteComandaRestaurante,
@@ -16,18 +17,21 @@ const {
 
 const router = Router();
 
-//Obtener reservas
+//Obtener ComandaRestaurante
 router.get("/", getComandaRestaurante);
 
-//Crear un reserva
+//obtenerComandaRestaurante
+router.get("/:id", getComandaRestauranteById);
+
+//Crear un ComandaRestaurante
 router.post(
   "/", createComandaRestaurante
 );
 
-//Actualizar un reserva
+//Actualizar un ComandaRestaurante
 router.put("/:id", updateComandaRestaurante);
 
-//Borrar un reserva
+//Borrar un ComandaRestaurante
 router.delete("/:id", deleteComandaRestaurante);
 
 module.exports = router;

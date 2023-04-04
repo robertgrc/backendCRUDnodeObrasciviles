@@ -89,7 +89,7 @@ const updateConsumoCliente = async (req, res = response) => {
 
     res.json({
       ok: true,
-      almacen: registroUpdate,
+      registroConsumoCliente: registroUpdate,
     });
 
     console.log(req.body);
