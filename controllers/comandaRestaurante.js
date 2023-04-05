@@ -88,7 +88,7 @@ const updateComandaRestaurante = async (req, res = response) => {
 
     res.json({
       ok: true,
-      almacen: registroUpdate,
+      registroComandaRestaurante: registroUpdate,
     });
 
     console.log(req.body);

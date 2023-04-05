@@ -12,6 +12,35 @@ const getLavanderia = async (req, res = response) => {
   });
 };
 
+const getLavanderiaById = async (req, res = response) =>{
+  const lavanderiaId = req.params.id;
+  console.log(lavanderiaId);
+  try {
+    const consumoLavanderiaById = await Lavanderia.findById(lavanderiaId);
+    if (!consumoLavanderiaById) {
+      return res.status(404).json({
+        ok: false,
+        msg: "No existe Reserva con ese id",
+      });
+    }
+    const consumofrigobar = {
+      ...consumoLavanderiaById,
+    }
+    console.log(consumofrigobar)
+    res.json({
+      ok: true,
+      reserva:consumoLavanderiaById
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      ok: false,
+      msg: "hable con el administrador Problema en LavanderiaById controller",
+    });
+  }
+}
+  
+
 const createLavanderia = async (req, res = response) => {
   const registro = new Lavanderia(req.body);
 
@@ -59,7 +88,7 @@ const updateLavanderia = async (req, res = response) => {
 
     res.json({
       ok: true,
-      almacen: registroUpdate,
+      registroLavanderia: registroUpdate,
     });
 
     console.log(req.body);
@@ -101,6 +130,7 @@ const deleteLavanderia = async (req, res = response) => {
 
 module.exports = {
   getLavanderia,
+  getLavanderiaById,
   createLavanderia,
   updateLavanderia,
   deleteLavanderia,
