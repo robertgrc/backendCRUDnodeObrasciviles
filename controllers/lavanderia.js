@@ -13,20 +13,20 @@ const getLavanderia = async (req, res = response) => {
 };
 
 const getLavanderiaById = async (req, res = response) =>{
-  const lavanderiaId = req.params.id;
-  console.log(lavanderiaId);
+  const consumoLavanderiaId = req.params.id;
+  console.log(consumoLavanderiaId);
   try {
-    const consumoLavanderiaById = await Lavanderia.findById(lavanderiaId);
+    const consumoLavanderiaById = await Lavanderia.findById(consumoLavanderiaId);
     if (!consumoLavanderiaById) {
       return res.status(404).json({
         ok: false,
         msg: "No existe Reserva con ese id",
       });
     }
-    const consumofrigobar = {
+    const consumoLavanderia = {
       ...consumoLavanderiaById,
-    }
-    console.log(consumofrigobar)
+    };
+    console.log(consumoLavanderia)
     res.json({
       ok: true,
       reserva:consumoLavanderiaById
@@ -35,11 +35,10 @@ const getLavanderiaById = async (req, res = response) =>{
     console.log(error);
     res.status(500).json({
       ok: false,
-      msg: "hable con el administrador Problema en LavanderiaById controller",
+      msg: "hable con el administrador Problema en comandaConsumoFrigobar controller",
     });
   }
 }
-  
 
 const createLavanderia = async (req, res = response) => {
   const registro = new Lavanderia(req.body);
@@ -62,6 +61,7 @@ const createLavanderia = async (req, res = response) => {
   }
 };
 
+
 const updateLavanderia = async (req, res = response) => {
   const registroId = req.params.id;
 
@@ -71,7 +71,7 @@ const updateLavanderia = async (req, res = response) => {
     if (!registro) {
       return res.status(404).json({
         ok: false,
-        msg: "No existe ningun registro con ese id",
+        msg: "No existe ningun registro de lavanderia con ese id",
       });
     }
     const nuevaSolicitudRegistro = {

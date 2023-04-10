@@ -23,13 +23,12 @@ const getComandaConsumoFrigobarById = async (req, res = response) =>{
     }
     const consumofrigobar = {
       ...consumoFrigobarById,
-    }
+    };
     console.log(consumofrigobar)
     res.json({
       ok: true,
       reserva:consumoFrigobarById
     });
-
   } catch (error) {
     console.log(error);
     res.status(500).json({
@@ -86,7 +85,7 @@ const updateComandaConsumoFrigobar = async (req, res = response) => {
 
     res.json({
       ok: true,
-      almacen: registroUpdate,
+      registro: registroUpdate,
     });
 
     console.log(req.body);
