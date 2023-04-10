@@ -27,6 +27,7 @@ app.use("/api/comandaConsumoFrigobar", require("./routes/comandaConsumoFrigobar"
 app.use("/api/comandaRestaurante", require("./routes/comandaRestaurante"));
 app.use("/api/consumoCliente", require("./routes/consumoCliente"));
 app.use("/api/lavanderia", require("./routes/lavanderia"));
+app.use("/api/controlCuenta", require("./routes/controlCuenta"));
 
 
 //Escuchar peticiones
