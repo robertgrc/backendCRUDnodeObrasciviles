@@ -13,6 +13,8 @@ const getLavanderia = async (req, res = response) => {
 };
 
 const getLavanderiaById = async (req, res = response) =>{
+  console.log("Controller: getLavanderiaById");
+
   const consumoLavanderiaId = req.params.id;
   console.log(consumoLavanderiaId);
   try {
@@ -25,17 +27,18 @@ const getLavanderiaById = async (req, res = response) =>{
     }
     const consumoLavanderia = {
       ...consumoLavanderiaById,
-    };
+    }
     console.log(consumoLavanderia)
     res.json({
       ok: true,
       reserva:consumoLavanderiaById
     });
+
   } catch (error) {
     console.log(error);
     res.status(500).json({
       ok: false,
-      msg: "hable con el administrador Problema en comandaConsumoFrigobar controller",
+      msg: "hable con el administrador Problema en consumoLavanderia controller",
     });
   }
 }

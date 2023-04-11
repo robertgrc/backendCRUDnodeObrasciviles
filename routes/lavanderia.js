@@ -9,6 +9,7 @@ const { validarCampos } = require("../middlewares/validar-campos");
 
 const {
   getLavanderia,
+  getLavanderiaById,
   createLavanderia,
   updateLavanderia,
   deleteLavanderia,
@@ -16,18 +17,19 @@ const {
 
 const router = Router();
 
-//Obtener reservas
+//Obtener registros Lavanderia
 router.get("/", getLavanderia);
 
-//Crear un reserva
-router.post(
-  "/", createLavanderia
-);
+//Obtener registro de Lavanderia con Id
+router.get("/:id", getLavanderiaById);
 
-//Actualizar un reserva
+//Crear un registro de Lavanderia
+router.post("/", createLavanderia);
+
+//Actualizar un registro de Lavanderia
 router.put("/:id", updateLavanderia);
 
-//Borrar un reserva
+//Borrar un registro de Lavanderia
 router.delete("/:id", deleteLavanderia);
 
 module.exports = router;
