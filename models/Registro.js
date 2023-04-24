@@ -40,6 +40,14 @@ const RegistroSchema = Schema({
     type: String,
     required: true,
   },
+  estadoHabitacion: {
+    type: String,
+    required: true,
+  },
+  numeroHabitacion: {
+    type: Number,
+    required: true,
+  },
   observaciones: {
     type: String,
   },
