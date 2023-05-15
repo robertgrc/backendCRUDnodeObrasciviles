@@ -11,7 +11,6 @@ const ReservaSchema = Schema({
   },
   telefono: {
     type: String,
-    required: true,
   },
   tarjetaCredito: {
     type: Number,

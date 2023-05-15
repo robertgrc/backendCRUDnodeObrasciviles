@@ -45,7 +45,7 @@ const RegistroSchema = Schema({
     required: true,
   },
   numeroHabitacion: {
-    type: Number,
+    type: String,
     required: true,
   },
   observaciones: {
