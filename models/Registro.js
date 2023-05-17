@@ -5,27 +5,54 @@ const RegistroSchema = Schema({
     type: String,
     required: true,
   },
-  nacionalidad: {
+  email: {
+    type: String,
+    required: true,
+  },
+  telefono: {
     type: String,
   },
-  profesion: {
+  tarjetaCredito: {
     type: String,
+    required: true,
   },
-  procedencia: {
+  numeroTarjeta: {
     type: String,
+    required: true,
   },
-  edad: {
-    type: Number,
-  },
-  estadoCivil: {
+  empresa: {
     type: String,
+    required: true,
   },
-  direccion: {
+  telefonoEmpresa: {
     type: String,
+    required: true,
   },
-  motivoViaje: {
+  reservadoPor: {
     type: String,
+    required: true,
   },
+  // nacionalidad: {
+  //   type: String,
+  // },
+  // profesion: {
+  //   type: String,
+  // },
+  // procedencia: {
+  //   type: String,
+  // },
+  // edad: {
+  //   type: Number,
+  // },
+  // estadoCivil: {
+  //   type: String,
+  // },
+  // direccion: {
+  //   type: String,
+  // },
+  // motivoViaje: {
+  //   type: String,
+  // },
   tieneEquipaje: {
     type: String,
   },
@@ -51,6 +78,7 @@ const RegistroSchema = Schema({
   observaciones: {
     type: String,
   },
+  
   user: {
     type: Schema.Types.ObjectId,
     ref: "Usuario",

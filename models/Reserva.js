@@ -24,6 +24,14 @@ const ReservaSchema = Schema({
     type: String,
     required: true,
   },
+  fechaIngreso: {
+    type: String,
+    required: true,
+  },
+  fechaSalida: {
+    type: String,
+    required: true,
+  },
   telefonoEmpresa: {
     type: String,
     required: true,
@@ -32,8 +40,16 @@ const ReservaSchema = Schema({
     type: String,
     required: true,
   },
-  fechaReserva: {
-    type: {},
+  numeroHabitacion: {
+    type: String,
+    required: true,
+  },
+  // fechaReserva: {
+  //   type: {},
+  //   required: true,
+  // },
+  estadoHabitacion: {
+    type: String,
     required: true,
   },
   tipoHabitacion: {
@@ -41,14 +57,6 @@ const ReservaSchema = Schema({
     required: true,
   },
   observaciones: {
-    type: String,
-    required: true,
-  },
-  fechaIngreso: {
-    type: String,
-    required: true,
-  },
-  fechaSalida: {
     type: String,
     required: true,
   },
