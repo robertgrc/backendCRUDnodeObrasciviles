@@ -1,7 +1,11 @@
 const { Schema, model } = require("mongoose");
 
 const LavanderiaSchema = Schema({
-    numeroHabitacion: {
+  idReserva: {
+    type: String,
+    required: true
+  },  
+  numeroHabitacion: {
         type: Number,
         required: true,
       },

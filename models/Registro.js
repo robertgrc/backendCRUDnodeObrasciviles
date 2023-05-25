@@ -32,27 +32,27 @@ const RegistroSchema = Schema({
     type: String,
     required: true,
   },
-  // nacionalidad: {
-  //   type: String,
-  // },
-  // profesion: {
-  //   type: String,
-  // },
-  // procedencia: {
-  //   type: String,
-  // },
-  // edad: {
-  //   type: Number,
-  // },
-  // estadoCivil: {
-  //   type: String,
-  // },
-  // direccion: {
-  //   type: String,
-  // },
-  // motivoViaje: {
-  //   type: String,
-  // },
+  nacionalidad: {
+    type: String,
+  },
+  profesion: {
+    type: String,
+  },
+  procedencia: {
+    type: String,
+  },
+  edad: {
+    type: Number,
+  },
+  estadoCivil: {
+    type: String,
+  },
+  direccion: {
+    type: String,
+  },
+  motivoViaje: {
+    type: String,
+  },
   tieneEquipaje: {
     type: String,
   },

@@ -1,6 +1,10 @@
 const { Schema, model } = require("mongoose");
 
 const ControlCuentaSchema = Schema({
+  idReserva: {
+    type: String,
+    required: true
+  },
   fechaActual: {
     type: String,
   },
