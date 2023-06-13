@@ -10,6 +10,28 @@ const getComandaConsumoFrigobar = async (req, res = response) => {
   });
 };
 
+const getComandaConsumoFrigobarByReservaId = async (req, res = response) => {
+  const idReserva = req.params.idReserva;
+  
+  try {
+    const comandas = await ComandaConsumoFrigobar.find().where('idReserva').equals(idReserva);
+    
+    res.json({
+      ok: true,
+      comandas,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      ok: false,
+      msg: "Hable con el administrador. Problema en el controlador de ComandaConsumoFrigobar",
+    });
+  }
+};
+
+
+
+
 const getComandaConsumoFrigobarById = async (req, res = response) =>{
   const consumoFrigobarId = req.params.id;
   console.log(consumoFrigobarId);
@@ -128,6 +150,7 @@ const deleteComandaConsumoFrigobar = async (req, res = response) => {
 module.exports = {
   getComandaConsumoFrigobar,
   getComandaConsumoFrigobarById,
+  getComandaConsumoFrigobarByReservaId,
   createComandaConsumoFrigobar,
   updateComandaConsumoFrigobar,
   deleteComandaConsumoFrigobar,

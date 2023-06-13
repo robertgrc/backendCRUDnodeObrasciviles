@@ -11,6 +11,7 @@ const { validarJWT } = require("../middlewares/validar-jwt")
 const {
   getComandaConsumoFrigobar,
   getComandaConsumoFrigobarById,
+  getComandaConsumoFrigobarByReservaId,
   createComandaConsumoFrigobar,
   updateComandaConsumoFrigobar,
   deleteComandaConsumoFrigobar,
@@ -23,6 +24,9 @@ router.get("/", getComandaConsumoFrigobar);
 
 //obtenerComandaConsumoFrigobarPorId
 router.get("/:id", getComandaConsumoFrigobarById);
+
+//obtenerComandaConsumoFrigobarPorId
+router.get("/:idReserva", getComandaConsumoFrigobarByReservaId);
 
 //Crear un reserva
 router.post("/", createComandaConsumoFrigobar);
