@@ -22,18 +22,18 @@ const LavanderiaSchema = Schema({
       },
       totalCaballeros:{
         type: Number,
-        required:true,
+       // required:true,
       },
       totalDamas:{
         type: Number,
-        required:true,
+       // required:true,
       },
       totalConsumo: {
         type: Number,
         required: true,
       },
       ListaCaballeros: [{
-        item: {
+        producto: {
           type: String,
           required: true
         },
@@ -47,7 +47,7 @@ const LavanderiaSchema = Schema({
         },
       }],
       ListaDamas: [{
-        item: {
+        producto: {
           type: String,
           required: true
         },

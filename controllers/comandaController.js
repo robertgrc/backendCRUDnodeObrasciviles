@@ -2,7 +2,7 @@ const { response } = require('express');
 const ComandaConsumoFrigobar = require('../models/ComandaConsumoFrigobar');
 const ComandaRestaurante = require('../models/ComandaRestaurante');
 const ComandaConsumoCliente = require('../models/ConsumoCliente');
-// const ComandaLavanderia = require('../models/ComandaLavanderia');
+const ComandaLavanderia = require('../models/Lavanderia');
 
 const getComandasByReservaId = async (req, res = response) => {
   const idReserva = req.params.idReserva;
@@ -11,13 +11,13 @@ const getComandasByReservaId = async (req, res = response) => {
     const comandasFrigobar = await ComandaConsumoFrigobar.find({ idReserva });
     const comandasRestaurante = await ComandaRestaurante.find({ idReserva });
     const comandasConsumoCliente = await ComandaConsumoCliente.find({ idReserva });
-    // const comandasLavanderia = await ComandaLavanderia.find({ idReserva });
+    const comandasLavanderia = await ComandaLavanderia.find({ idReserva });
 
     const comandas = {
       comandasFrigobar,
       comandasRestaurante,
       comandasConsumoCliente,
-      // comandasLavanderia
+      comandasLavanderia
     };
 
     res.json({
