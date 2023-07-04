@@ -37,7 +37,12 @@ const ComandaRestauranteSchema = Schema({
       type: Number,
       required: true
     }
-  }]
+  }],
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: "Usuario",
+    required: true,
+  },
 });
 
 ComandaRestauranteSchema.method("toJSON", function () {

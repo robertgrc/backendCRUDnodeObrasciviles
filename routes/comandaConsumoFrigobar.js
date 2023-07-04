@@ -29,7 +29,9 @@ router.get("/:id", getComandaConsumoFrigobarById);
 router.get("/:idReserva", getComandaConsumoFrigobarByReservaId);
 
 //Crear un reserva
-router.post("/", createComandaConsumoFrigobar);
+router.post("/",[
+  validarJWT
+], createComandaConsumoFrigobar);
 //Actualizar un reserva
 router.put("/:id", updateComandaConsumoFrigobar);
 //Borrar un reserva

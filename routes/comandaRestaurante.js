@@ -14,6 +14,7 @@ const {
   updateComandaRestaurante,
   deleteComandaRestaurante,
 } = require("../controllers/comandaRestaurante");
+const { validarJWT } = require("../middlewares/validar-jwt");
 
 const router = Router();
 
@@ -25,7 +26,9 @@ router.get("/:id", getComandaRestauranteById);
 
 //Crear un ComandaRestaurante
 router.post(
-  "/", createComandaRestaurante
+  "/", [
+    validarJWT
+  ],  createComandaRestaurante
 );
 
 //Actualizar un ComandaRestaurante

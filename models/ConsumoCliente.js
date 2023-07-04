@@ -37,7 +37,12 @@ const ConsumoClienteSchema = Schema({
       type: Number,
       required: true
     }
-  }]
+  }],
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: "Usuario",
+    required: true,
+  },
 });
 
     ConsumoClienteSchema.method("toJSON", function () {

@@ -14,6 +14,7 @@ const {
   updateConsumoCliente,
   deleteConsumoCliente,
 } = require("../controllers/consumoCliente");
+const { validarJWT } = require("../middlewares/validar-jwt");
 
 const router = Router();
 
@@ -24,7 +25,9 @@ router.get("/", getConsumoCliente);
 router.get("/:id", getConsumoClienteById);
 
 //Crear un reserva
-router.post("/", createConsumoCliente);
+router.post("/",[
+  validarJWT
+], createConsumoCliente);
 
 //Actualizar un reserva
 router.put("/:id", updateConsumoCliente);

@@ -6,6 +6,7 @@ const { Router } = require("express");
 const { check } = require("express-validator");
 
 const { validarCampos } = require("../middlewares/validar-campos");
+const { validarJWT } = require("../middlewares/validar-jwt");
 
 const {
   getLavanderia,
@@ -24,7 +25,9 @@ router.get("/", getLavanderia);
 router.get("/:id", getLavanderiaById);
 
 //Crear un registro de Lavanderia
-router.post("/", createLavanderia);
+router.post("/",[
+  validarJWT
+], createLavanderia);
 
 //Actualizar un registro de Lavanderia
 router.put("/:id", updateLavanderia);

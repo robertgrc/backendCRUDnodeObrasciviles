@@ -6,6 +6,7 @@ const { Router } = require("express");
 const { check } = require("express-validator");
 
 const { validarCampos } = require("../middlewares/validar-campos");
+const { validarJWT } = require("../middlewares/validar-jwt");
 
 const {
   getControlCuenta,
@@ -24,7 +25,9 @@ router.get("/", getControlCuenta);
 router.get("/:id", getControlCuentaById);
 
 //Crear un ControlCuenta
-router.post("/", createControlCuenta);
+router.post("/",[
+  validarJWT
+], createControlCuenta);
 
 //Actualizar un ControlCuenta
 router.put("/:id", updateControlCuenta);
