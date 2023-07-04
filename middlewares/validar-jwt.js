@@ -13,6 +13,7 @@ const validarJWT = (req=request, res = response, next)=>{
       }
 
       try {
+            console.log(token)
 
             const { uid, name} = jwt.verify(
                 token,

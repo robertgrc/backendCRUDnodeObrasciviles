@@ -15,6 +15,7 @@ const {
   updateRegistro,
   deleteRegistro,
 } = require("../controllers/registroCliente");
+const { validarJWT } = require("../middlewares/validar-jwt");
 
 const router = Router();
 
@@ -28,6 +29,7 @@ router.post(
   "/",
   [
     check("nombreCompleto", "El nombreCompleto es obligatorio").not().isEmpty(),
+    validarJWT,
     validarCampos,
   ],
   createRegistro

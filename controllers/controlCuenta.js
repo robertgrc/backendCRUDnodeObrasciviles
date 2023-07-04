@@ -47,6 +47,7 @@ const createControlCuenta = async (req, res = response) => {
 
   try {
     registro.user = req.uid;
+    console.log("Usuario",registro.user)
 
     const solicitudRegistroGuardado = await registro.save();
 

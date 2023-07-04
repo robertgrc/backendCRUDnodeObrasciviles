@@ -5,49 +5,31 @@ const ControlCuentaSchema = Schema({
     type: String,
     required: true
   },
-  fechaActual: {
-    type: String,
-  },
-  detalle: {
+  recepcionista: {
     type: String,
     required: true
   },
-  consumo: {
-    type: Number,
-    required: true,
-  },
-  saldo: {
-    type: Number,
-    required: true,
-  },
-  observaciones:{
+  nombrePax: {
     type: String,
+    required: true
   },
-  totalConsumo: {
+  fechaActual: {
+    type: Date,
+   // required: true
+  },
+  detalleAbono: {
+    type: String,
+    required: true
+  },
+  abono: {
     type: Number,
     required: true,
   },
-  cuentaPax: [{
-    cantidad: {
-      type: Number,
-      
-    },
-    detalle: {
-      type: String,
-     
-    },
-    tarifa: {
-      type: Number,
-      
-    },
-    monto:{
-      type: Number,
-     
-    },
-    montoTotal:{
-      type: Number,
-    }
-  }]
+  // user: {
+  //   type: Schema.Types.ObjectId,
+  //   ref: 'Usuario',
+  //   required: true
+  // }
 });
 
 ControlCuentaSchema.method("toJSON", function () {

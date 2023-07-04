@@ -42,7 +42,7 @@ const getRegistroById = async (req, res = response) =>{
     });
   }
 }
-
+//* CrearRegistro
 const createRegistro = async (req, res = response) => {
   const registro = new RegistroCliente(req.body);
 
