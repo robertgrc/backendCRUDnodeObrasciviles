@@ -7,6 +7,7 @@ const { Router } = require("express");
 const { check } = require("express-validator");
 
 const { validarCampos } = require("../middlewares/validar-campos");
+const {validarJWT} = require("../middlewares/validar-jwt");
 
 const {
   getRegistros,
@@ -28,6 +29,7 @@ router.post(
   "/",
   [
     check("nombreCompleto", "El nombreCompleto es obligatorio").not().isEmpty(),
+    validarJWT,
     validarCampos,
   ],
   createRegistro

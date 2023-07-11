@@ -44,10 +44,6 @@ const ReservaSchema = Schema({
     type: String,
     required: true,
   },
-  // fechaReserva: {
-  //   type: {},
-  //   required: true,
-  // },
   estadoHabitacion: {
     type: String,
     required: true,
@@ -63,7 +59,7 @@ const ReservaSchema = Schema({
   user: {
     type: Schema.Types.ObjectId,
     ref: "Usuario",
-    // required: true,
+    required: true,
   },
 });
 
