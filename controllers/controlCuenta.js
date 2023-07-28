@@ -3,8 +3,7 @@ const ControlCuenta = require("../models/ControlCuenta");
 
 const getControlCuenta = async (req, res = response) => {
   //verificar que tenga el evento
-
-  const registros = await ControlCuenta.find();
+const registros = await ControlCuenta.find();
 
   res.json({
     ok: true,
@@ -105,21 +104,21 @@ const updateControlCuenta = async (req, res = response) => {
 const deleteControlCuenta = async (req, res = response) => {
   const registroId = req.params.id;
 
-  try {
+try {
     const registro = await ControlCuenta.findById(registroId);
-
+  
     if (!registro) {
       return res.status(404).json({
         ok: false,
         msg: "No existe ningun registro con ese id",
       });
     }
-
+  
     await ControlCuenta.findByIdAndDelete(registroId);
     res.json({
       ok: true,
     });
-
+  
     console.log(req.body);
   } catch (error) {
     console.log(error);

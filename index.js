@@ -31,6 +31,12 @@ app.use("/api/lavanderia", require("./routes/lavanderia"));
 app.use("/api/controlCuenta", require("./routes/controlCuenta"));
 app.use("/api/diarioIngresosEgresos", require("./routes/diarioIngresosEgresos"));
 app.use("/api/comandas", require("./routes/comandas"));
+app.use("/api/editarComandasRestaurante", require("./routes/editarComandasRestaurante"));
+app.use("/api/editarComandasFrigobar", require("./routes/editarComandasFrigobar"));
+app.use("/api/editarComandasConsumoCliente", require("./routes/editarComandasConsumoCliente"));
+app.use("/api/editarComandasLavanderia", require("./routes/editarComandasLavanderia"));
+app.use("/api/editarAbono", require("./routes/editarAbono"));
+
 
 
 //Escuchar peticiones

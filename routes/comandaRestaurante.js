@@ -9,6 +9,7 @@ const { validarCampos } = require("../middlewares/validar-campos");
 const { validarJWT } = require("../middlewares/validar-jwt");
 
 const {
+  getComandasRestauranteById,
   getComandaRestaurante,
   getComandaRestauranteById,
   createComandaRestaurante,
@@ -17,6 +18,9 @@ const {
 } = require("../controllers/comandaRestaurante");
 
 const router = Router();
+
+// //Obtener con un idReserva las comandas asociadas a ese id
+// router.get("/reserva/:idReserva", getComandasRestauranteById);
 
 //Obtener ComandaRestaurante
 router.get("/", getComandaRestaurante);
