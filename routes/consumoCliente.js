@@ -25,9 +25,7 @@ router.get("/", getConsumoCliente);
 router.get("/:id", getConsumoClienteById);
 
 //Crear un reserva
-router.post("/",[
-  validarJWT
-], createConsumoCliente);
+router.post("/", [validarJWT], createConsumoCliente);
 
 //Actualizar un reserva
 router.put("/:id", updateConsumoCliente);
