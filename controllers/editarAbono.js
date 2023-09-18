@@ -51,41 +51,25 @@ const getAllAbonos = async (req, res = response) => {
   }
 };
 
-const getAbonosPorTurno = async (req, res = response) => {
-  const turno = req.params.turno; // Obtén el turno desde la URL
+const getAbonosByRecepcionistaId = async (req, res = response) => {
+  const idRecepcionista = req.params.idRecepcionista;
+
+  // Obtén la fecha actual y calcula la fecha hace 24 horas
+  const fechaActual = new Date();
+  const fechaLimite = new Date(fechaActual);
+  fechaLimite.setHours(fechaActual.getHours() - 24);
 
   try {
-    let inicio, fin;
-
-    // Determinar el rango de tiempo según el turno
-    switch (turno) {
-      case "manana":
-        inicio = new Date().setHours(7, 0, 0, 0); // 7:00 AM
-        fin = new Date().setHours(15, 0, 0, 0); // 3:00 PM
-        break;
-      case "tarde":
-        inicio = new Date().setHours(15, 0, 0, 0); // 3:00 PM
-        fin = new Date().setHours(23, 0, 0, 0); // 11:00 PM
-        break;
-      case "noche":
-        inicio = new Date().setHours(23, 0, 0, 0); // 11:00 PM
-        fin = new Date().setHours(7, 0, 0, 0); // 7:00 AM del día siguiente
-        break;
-      default:
-        return res.status(400).json({
-          ok: false,
-          msg: "Turno no válido",
-        });
-    }
-
+    // Busca los abonos realizados por el recepcionista en las últimas 24 horas
     const abonos = await Abono.find({
-      fecha_hora: { $gte: new Date(inicio), $lt: new Date(fin) },
+      idRecepcionista: idRecepcionista,
+      fechaActual: { $gte: fechaLimite }, // Filtra por fecha en las últimas 24 horas
     });
 
     if (abonos.length === 0) {
       return res.status(404).json({
         ok: false,
-        msg: `No se encontraron abonos para el turno de ${turno}`,
+        msg: "No se encontraron abonos para el recepcionista en las últimas 24 horas",
       });
     }
 
@@ -97,13 +81,13 @@ const getAbonosPorTurno = async (req, res = response) => {
     console.log(error);
     res.status(500).json({
       ok: false,
-      msg: "Hable con el administrador. Problema al obtener los abonos por turno",
+      msg: "Hable con el administrador. Problema al obtener los abonos por ID de recepcionista",
     });
   }
 };
 
 module.exports = {
-  getAbonosPorTurno,
+  getAbonosByRecepcionistaId,
   getComandasByReservaId,
   getAllAbonos,
 };

@@ -3,23 +3,27 @@ const { Schema, model } = require("mongoose");
 const ControlCuentaSchema = Schema({
   idReserva: {
     type: String,
-    required: true
+    required: true,
   },
   recepcionista: {
     type: String,
-    required: true
+    required: true,
+  },
+  idRecepcionista: {
+    type: String,
+    required: true,
   },
   nombrePax: {
     type: String,
-    required: true
+    required: true,
   },
   fechaActual: {
     type: Date,
-   // required: true
+    // required: true
   },
   detalleAbono: {
     type: String,
-    required: true
+    required: true,
   },
   abono: {
     type: Number,
@@ -27,9 +31,9 @@ const ControlCuentaSchema = Schema({
   },
   user: {
     type: Schema.Types.ObjectId,
-    ref: 'Usuario',
-    required: true
-  }
+    ref: "Usuario",
+    required: true,
+  },
 });
 
 ControlCuentaSchema.method("toJSON", function () {
