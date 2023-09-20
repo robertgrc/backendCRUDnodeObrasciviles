@@ -23,21 +23,41 @@ app.use("/api/auth", require("./routes/auth"));
 app.use("/api/reserva", require("./routes/reserva"));
 app.use("/api/registro", require("./routes/registro"));
 app.use("/api/registroCliente", require("./routes/registroCliente"));
-app.use("/api/registroTarjetaReserva", require("./routes/registroTarjetaReserva"));
-app.use("/api/comandaConsumoFrigobar", require("./routes/comandaConsumoFrigobar"));
+app.use(
+  "/api/registroTarjetaReserva",
+  require("./routes/registroTarjetaReserva")
+);
+app.use(
+  "/api/comandaConsumoFrigobar",
+  require("./routes/comandaConsumoFrigobar")
+);
 app.use("/api/comandaRestaurante", require("./routes/comandaRestaurante"));
 app.use("/api/consumoCliente", require("./routes/consumoCliente"));
 app.use("/api/lavanderia", require("./routes/lavanderia"));
 app.use("/api/controlCuenta", require("./routes/controlCuenta"));
-app.use("/api/diarioIngresosEgresos", require("./routes/diarioIngresosEgresos"));
+app.use(
+  "/api/diarioIngresosEgresos",
+  require("./routes/diarioIngresosEgresos")
+);
 app.use("/api/comandas", require("./routes/comandas"));
-app.use("/api/editarComandasRestaurante", require("./routes/editarComandasRestaurante"));
-app.use("/api/editarComandasFrigobar", require("./routes/editarComandasFrigobar"));
-app.use("/api/editarComandasConsumoCliente", require("./routes/editarComandasConsumoCliente"));
-app.use("/api/editarComandasLavanderia", require("./routes/editarComandasLavanderia"));
+app.use(
+  "/api/editarComandasRestaurante",
+  require("./routes/editarComandasRestaurante")
+);
+app.use(
+  "/api/editarComandasFrigobar",
+  require("./routes/editarComandasFrigobar")
+);
+app.use(
+  "/api/editarComandasConsumoCliente",
+  require("./routes/editarComandasConsumoCliente")
+);
+app.use(
+  "/api/editarComandasLavanderia",
+  require("./routes/editarComandasLavanderia")
+);
 app.use("/api/editarAbono", require("./routes/editarAbono"));
-
-
+app.use("/api/agregarEgreso", require("./routes/agregarEgreso"));
 
 //Escuchar peticiones
 app.listen(process.env.PORT, () => {

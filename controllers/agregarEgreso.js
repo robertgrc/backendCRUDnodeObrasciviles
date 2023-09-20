@@ -1,60 +1,81 @@
 const { response } = require("express");
-const Abono = require("../models/ControlCuenta");
+const Egreso = require("../models/AgregarEgreso");
 const Registro = require("../models/Registro");
-const { getRegistros, getRegistroById } = require("./registro");
 
-const getComandasByReservaId = async (req, res = response) => {
-  const idReserva = req.params.idReserva;
+const createEgreso = async (req, res = response) => {
+  const registro = new Egreso(req.body);
 
   try {
-    const abono = await Abono.find({ idReserva });
+    registro.user = req.uid;
+    console.log("Usuario", registro.user);
 
-    if (abono.length === 0) {
-      return res.status(404).json({
-        ok: false,
-        msg: "No se encontraron abonos para la reserva con ese id",
-      });
-    }
+    const solicitudRegistroGuardado = await registro.save();
 
     res.json({
       ok: true,
-      abono,
+      registro: solicitudRegistroGuardado,
     });
   } catch (error) {
     console.log(error);
     res.status(500).json({
       ok: false,
-      msg: "Hable con el administrador. Problema al obtener los abonos por ID",
+      msg: "Hable con el Administrador problema en AgregarEgreso",
     });
   }
 };
 
-const getAllAbonos = async (req, res = response) => {
-  try {
-    const abonos = await Abono.find();
+const getEgresosByReservaId = async (req, res = response) => {
+  const idReserva = req.params.idReserva;
 
-    if (abonos.length === 0) {
+  try {
+    const egreso = await Egreso.find({ idReserva });
+
+    if (egreso.length === 0) {
       return res.status(404).json({
         ok: false,
-        msg: "No se encontraron abonos",
+        msg: "No se encontraron egresos para la reserva con ese id",
       });
     }
 
     res.json({
       ok: true,
-      abonos,
+      egreso,
     });
   } catch (error) {
     console.log(error);
     res.status(500).json({
       ok: false,
-      msg: "Hable con el administrador. Problema al obtener los abonos",
+      msg: "Hable con el administrador. Problema al obtener los egresos por ID",
+    });
+  }
+};
+
+const getAllEgresos = async (req, res = response) => {
+  try {
+    const egresos = await Egreso.find();
+
+    if (egresos.length === 0) {
+      return res.status(404).json({
+        ok: false,
+        msg: "No se encontraron egresos",
+      });
+    }
+
+    res.json({
+      ok: true,
+      egresos,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      ok: false,
+      msg: "Hable con el administrador. Problema al obtener los egresos",
     });
   }
 };
 //*------adicionando filtrado y reservas
 
-const getAbonosByRecepcionistaId = async (req, res = response) => {
+const getEgresosByRecepcionistaId = async (req, res = response) => {
   const idRecepcionista = req.params.idRecepcionista;
   const fechaConsulta = req.query.fecha; // Puede ser la fecha actual o una fecha específica
 
@@ -89,28 +110,28 @@ const getAbonosByRecepcionistaId = async (req, res = response) => {
   }
 
   try {
-    // Busca los abonos realizados por el recepcionista en la fecha especificada o el día actual
-    const abonos = await Abono.find({
+    // Busca los egresos realizados por el recepcionista en la fecha especificada o el día actual
+    const egresos = await Egreso.find({
       idRecepcionista: idRecepcionista,
       ...consultaFecha, // Agrega la condición de fecha según lo configurado
     });
 
-    if (abonos.length === 0) {
+    if (egresos.length === 0) {
       return res.status(404).json({
         ok: false,
-        msg: "No se encontraron abonos para el recepcionista en la fecha especificada",
+        msg: "No se encontraron egresos para el recepcionista en la fecha especificada",
       });
     }
 
-    // Ahora, para cada abono, busca la reserva correspondiente por idReserva
+    // Ahora, para cada egreso, busca la reserva correspondiente por idReserva
 
-    const abonosConReservas = await Promise.all(
-      abonos.map(async (abono) => {
-        const reserva = await Registro.findById(abono.idReserva);
-        // return { ...abono.toObject(), reserva }; // Combina el abono con la reserva
+    const egresosConReservas = await Promise.all(
+      egresos.map(async (egreso) => {
+        const reserva = await Registro.findById(egreso.idReserva);
+        // return { ...egreso.toObject(), reserva }; // Combina el egreso con la reserva
         if (!reserva) {
           return {
-            ...abono.toObject(),
+            ...egreso.toObject(),
             habitacion: "",
             nombreHuesped: "",
           };
@@ -120,7 +141,7 @@ const getAbonosByRecepcionistaId = async (req, res = response) => {
         }-${reserva.tipoHabitacion.join(", ")}`; // Si tipoHabitacion es un array
 
         return {
-          ...abono.toObject(),
+          ...egreso.toObject(),
           habitacion,
           nombreHuesped: reserva.nombreCompleto,
         };
@@ -128,18 +149,19 @@ const getAbonosByRecepcionistaId = async (req, res = response) => {
     );
     res.json({
       ok: true,
-      abonos: abonosConReservas,
+      egresos: egresosConReservas,
     });
   } catch (error) {
     console.log(error);
     res.status(500).json({
       ok: false,
-      msg: "Hable con el administrador. Problema al obtener los abonos por ID de recepcionista",
+      msg: "Hable con el administrador. Problema al obtener los egresos por ID de recepcionista",
     });
   }
 };
 module.exports = {
-  getAbonosByRecepcionistaId,
-  getComandasByReservaId,
-  getAllAbonos,
+  createEgreso,
+  getEgresosByRecepcionistaId,
+  getEgresosByReservaId,
+  getAllEgresos,
 };
