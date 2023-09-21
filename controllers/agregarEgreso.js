@@ -47,7 +47,18 @@ const getAllEgresos = async (req, res = response) => {
     });
   }
 };
-//*------adicionando filtrado y reservas
+//*--------
+const estructurarEgresos = (egresos) => {
+  return egresos.map((egreso) => {
+    return {
+      habitacion: egreso.nombrePax,
+      recepcionista: egreso.recepcionista,
+      detalleabono: egreso.detalleAbono,
+      egreso: egreso.abono,
+    };
+  });
+};
+//*------adicionando filtrado
 const getEgresosByRecepcionistaId = async (req, res = response) => {
   const idRecepcionista = req.params.idRecepcionista;
   const fechaConsulta = req.query.fecha; // Puede ser la fecha actual o una fecha específica
@@ -96,10 +107,11 @@ const getEgresosByRecepcionistaId = async (req, res = response) => {
       });
     }
 
+    const egresosEstructurados = estructurarEgresos(egresos);
     // Devolver los egresos encontrados
     return res.status(200).json({
       ok: true,
-      egresos, // Esto incluirá los egresos encontrados
+      abonos: egresosEstructurados, // Esto incluirá los egresos encontrados
     });
   } catch (error) {
     console.log(error);
