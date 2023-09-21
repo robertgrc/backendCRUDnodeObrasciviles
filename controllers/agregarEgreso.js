@@ -24,32 +24,6 @@ const createEgreso = async (req, res = response) => {
   }
 };
 
-const getEgresosByReservaId = async (req, res = response) => {
-  const idReserva = req.params.idReserva;
-
-  try {
-    const egreso = await Egreso.find({ idReserva });
-
-    if (egreso.length === 0) {
-      return res.status(404).json({
-        ok: false,
-        msg: "No se encontraron egresos para la reserva con ese id",
-      });
-    }
-
-    res.json({
-      ok: true,
-      egreso,
-    });
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({
-      ok: false,
-      msg: "Hable con el administrador. Problema al obtener los egresos por ID",
-    });
-  }
-};
-
 const getAllEgresos = async (req, res = response) => {
   try {
     const egresos = await Egreso.find();
@@ -74,13 +48,10 @@ const getAllEgresos = async (req, res = response) => {
   }
 };
 //*------adicionando filtrado y reservas
-
 const getEgresosByRecepcionistaId = async (req, res = response) => {
   const idRecepcionista = req.params.idRecepcionista;
   const fechaConsulta = req.query.fecha; // Puede ser la fecha actual o una fecha específica
-
   let consultaFecha = {};
-
   if (fechaConsulta) {
     // Si se proporciona una fecha, consulta solo para esa fecha
     const fechaConsultaObj = new Date(fechaConsulta);
@@ -107,13 +78,15 @@ const getEgresosByRecepcionistaId = async (req, res = response) => {
         $lt: fechaFinDia,
       },
     };
+    // Imprimir la fecha actual en la consola para verificarla
+    console.log("Fecha actual:", fechaActual.toISOString());
   }
 
   try {
     // Busca los egresos realizados por el recepcionista en la fecha especificada o el día actual
     const egresos = await Egreso.find({
       idRecepcionista: idRecepcionista,
-      ...consultaFecha, // Agrega la condición de fecha según lo configurado
+      ...consultaFecha,
     });
 
     if (egresos.length === 0) {
@@ -123,33 +96,10 @@ const getEgresosByRecepcionistaId = async (req, res = response) => {
       });
     }
 
-    // Ahora, para cada egreso, busca la reserva correspondiente por idReserva
-
-    const egresosConReservas = await Promise.all(
-      egresos.map(async (egreso) => {
-        const reserva = await Registro.findById(egreso.idReserva);
-        // return { ...egreso.toObject(), reserva }; // Combina el egreso con la reserva
-        if (!reserva) {
-          return {
-            ...egreso.toObject(),
-            habitacion: "",
-            nombreHuesped: "",
-          };
-        }
-        const habitacion = `${
-          reserva.numeroHabitacion
-        }-${reserva.tipoHabitacion.join(", ")}`; // Si tipoHabitacion es un array
-
-        return {
-          ...egreso.toObject(),
-          habitacion,
-          nombreHuesped: reserva.nombreCompleto,
-        };
-      })
-    );
-    res.json({
+    // Devolver los egresos encontrados
+    return res.status(200).json({
       ok: true,
-      egresos: egresosConReservas,
+      egresos, // Esto incluirá los egresos encontrados
     });
   } catch (error) {
     console.log(error);
@@ -159,9 +109,9 @@ const getEgresosByRecepcionistaId = async (req, res = response) => {
     });
   }
 };
+
 module.exports = {
   createEgreso,
   getEgresosByRecepcionistaId,
-  getEgresosByReservaId,
   getAllEgresos,
 };

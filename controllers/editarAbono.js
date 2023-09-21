@@ -1,7 +1,6 @@
 const { response } = require("express");
 const Abono = require("../models/ControlCuenta");
 const Registro = require("../models/Registro");
-const { getRegistros, getRegistroById } = require("./registro");
 
 const getComandasByReservaId = async (req, res = response) => {
   const idReserva = req.params.idReserva;
