@@ -51,9 +51,9 @@ const getAllEgresos = async (req, res = response) => {
 const estructurarEgresos = (egresos) => {
   return egresos.map((egreso) => {
     return {
-      habitacion: egreso.nombrePax,
+      nombreTrabajador: egreso.nombrePax,
       recepcionista: egreso.recepcionista,
-      detalleabono: egreso.detalleAbono,
+      detalleEgreso: egreso.detalleAbono,
       egreso: egreso.abono,
     };
   });
@@ -111,7 +111,7 @@ const getEgresosByRecepcionistaId = async (req, res = response) => {
     // Devolver los egresos encontrados
     return res.status(200).json({
       ok: true,
-      abonos: egresosEstructurados, // Esto incluirá los egresos encontrados
+      egresos: egresosEstructurados, // Esto incluirá los egresos encontrados
     });
   } catch (error) {
     console.log(error);
