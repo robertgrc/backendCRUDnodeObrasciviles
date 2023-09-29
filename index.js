@@ -58,6 +58,7 @@ app.use(
 );
 app.use("/api/editarAbono", require("./routes/editarAbono"));
 app.use("/api/agregarEgreso", require("./routes/agregarEgreso"));
+app.use("/api/checkout", require("./routes/checkout"));
 
 //Escuchar peticiones
 app.listen(process.env.PORT, () => {
