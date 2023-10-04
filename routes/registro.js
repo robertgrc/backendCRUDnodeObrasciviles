@@ -7,10 +7,11 @@ const { Router } = require("express");
 const { check } = require("express-validator");
 
 const { validarCampos } = require("../middlewares/validar-campos");
-const {validarJWT} = require("../middlewares/validar-jwt");
+const { validarJWT } = require("../middlewares/validar-jwt");
 
 const {
   getRegistros,
+  getRegistrosPorMesYAnio,
   getRegistroById,
   createRegistro,
   updateRegistro,
@@ -21,6 +22,8 @@ const router = Router();
 
 //Obtener registro
 router.get("/", getRegistros);
+
+router.get("/:anio/:mes", getRegistrosPorMesYAnio);
 
 router.get("/:id", getRegistroById);
 

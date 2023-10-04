@@ -13,7 +13,30 @@ const getRegistros = async (req, res = response) => {
   });
 };
 
-const getRegistroById = async (req, res = response) =>{
+const getRegistrosPorMesYAnio = async (req, res = response) => {
+  const { mes, anio } = req.params;
+
+  try {
+    const registros = await Registro.find({
+      fechaIngreso: {
+        $regex: `^${anio}-${mes}-\\d{2}`,
+      },
+    });
+
+    res.json({
+      ok: true,
+      registros,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      ok: false,
+      msg: "Error al obtener registros por mes y año",
+    });
+  }
+};
+
+const getRegistroById = async (req, res = response) => {
   const registroId = req.params.id;
   console.log(registroId);
   try {
@@ -24,16 +47,15 @@ const getRegistroById = async (req, res = response) =>{
         msg: "No existe Reserva con ese id",
       });
     }
-    
+
     const registro = {
       ...registroById,
-    }
-    console.log(registro)
+    };
+    console.log(registro);
     res.json({
       ok: true,
-      registro:registroById,
+      registro: registroById,
     });
-
   } catch (error) {
     console.log(error);
     res.status(500).json({
@@ -41,7 +63,7 @@ const getRegistroById = async (req, res = response) =>{
       msg: "hable con el administrador",
     });
   }
-}
+};
 
 const createRegistro = async (req, res = response) => {
   const registro = new Registro(req.body);
@@ -80,7 +102,11 @@ const updateRegistro = async (req, res = response) => {
       ...req.body,
     };
 
-    const registroUpdate = await Registro.findByIdAndUpdate(registroId,nuevaSolicitudRegistro,{new: true,});
+    const registroUpdate = await Registro.findByIdAndUpdate(
+      registroId,
+      nuevaSolicitudRegistro,
+      { new: true }
+    );
 
     res.json({
       ok: true,
@@ -126,6 +152,7 @@ const deleteRegistro = async (req, res = response) => {
 
 module.exports = {
   getRegistros,
+  getRegistrosPorMesYAnio,
   getRegistroById,
   createRegistro,
   updateRegistro,

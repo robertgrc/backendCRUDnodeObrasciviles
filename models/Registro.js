@@ -78,12 +78,14 @@ const RegistroSchema = Schema({
   observaciones: {
     type: String,
   },
-  
+
   user: {
     type: Schema.Types.ObjectId,
     ref: "Usuario",
   },
 });
+
+RegistroSchema.index({ fechaIngreso: 1 });
 
 RegistroSchema.method("toJSON", function () {
   const { __v, _id, ...object } = this.toObject();
