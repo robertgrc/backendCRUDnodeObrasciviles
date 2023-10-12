@@ -12,7 +12,7 @@ const getRegistros = async (req, res = response) => {
     registros,
   });
 };
-
+// Se tiene que pasar el mes 01= enero, 02=febrero
 const getRegistrosPorMesYAnio = async (req, res = response) => {
   const { mes, anio } = req.params;
 

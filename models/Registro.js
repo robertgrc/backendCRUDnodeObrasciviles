@@ -85,8 +85,6 @@ const RegistroSchema = Schema({
   },
 });
 
-RegistroSchema.index({ fechaIngreso: 1 });
-
 RegistroSchema.method("toJSON", function () {
   const { __v, _id, ...object } = this.toObject();
   object.id = _id;
